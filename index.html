@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Dog Image</title>
+</head>
+
+<body>
+    <div id="div" class="imgContainer">
+        <img src="" id="image" class="dogImage" alt="image">
+        <button id="btn" class="btn">Get Dog</button>
+    </div>
+    
+</body>
+<script>
+    const container = document.getElementById('div')
+    let dog = document.getElementById('image')
+    const btn = document.getElementById('btn')
+
+    function changeImg() {
+        fetch('https://random.dog/woof.json')
+            .then(response => response.json())
+            .then(data =>
+                dog.src = data.url
+            )
+            .catch(err => console.log(err))
+    }
+    changeImg()
+    btn.addEventListener('click', changeImg)
+    container.appendChild(dog)
+    container.appendChild(btn)
+</script>
+
+</html>
