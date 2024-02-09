@@ -19,16 +19,23 @@
     const container = document.getElementById('div')
     let dog = document.getElementById('image')
     const btn = document.getElementById('btn')
+    let imageUrl = '';
 
     function changeImg() {
         fetch('https://random.dog/woof.json')
             .then(response => response.json())
-            .then(data =>
-                dog.src = data.url
-            )
+            .then(data => {
+                imageUrl = data.url;
+                dog.src = imageUrl;
+            })
             .catch(err => console.log(err))
     }
-    changeImg()
+
+    if (imageUrl) {
+        dog.src = imageUrl;
+    } else {
+        changeImg();
+    }
     btn.addEventListener('click', changeImg)
     container.appendChild(dog)
     container.appendChild(btn)
